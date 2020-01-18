@@ -21,6 +21,8 @@
     margin-bottom: 1.5rem;
     position: relative;
     min-height: 200px;
+    color: white;
+    text-shadow: 0 0 2px #000;
 }
 
 .card .name-container {
@@ -53,18 +55,33 @@
     font-size: .9rem;
 }
 
+.card .card-form {
+    color: white;
+    text-shadow: 0 0 2px #000;
+    text-transform: uppercase;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
 .inactive {
     opacity: .7;
 }
 
 .visa {
-    background: blueviolet;
+    background: gold url(../images/visa.png) no-repeat bottom right 10px;
+    background-size: 80px;
+    color: black;
+    text-shadow: none;
 }
 
 .maestro {
-    background: violet;
+    background: grey url(../images/maestro.png) no-repeat bottom 20px right 20px;
+    background-size: 70px;
+    color: #fff;
 }
 
 .mastercard {
-    background: yellow;
+    background: royalblue url(../images/mastercard.png) no-repeat bottom 10px right 10px;
+    background-size: 80px;
 }
