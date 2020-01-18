@@ -27,12 +27,12 @@ public class CardRequestController {
 	@PostMapping("/request")
 	public String addRequest(@ModelAttribute CardRequest request ) {
 		int ownerid = 1;
+		String ownername = "Ivo";
+		String ownersurname = "Ivic";
 		service.saveOrUpdate(request);
-		Card newcard = request.createCard(ownerid, request);
+		Card newcard = request.createCard(ownerid, ownername, ownersurname, request);
 		cardservice.saveOrUpdate(newcard);
 		return "redirect:/cards";
-
-		
 	}
 
 }

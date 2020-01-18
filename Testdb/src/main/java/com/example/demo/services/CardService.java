@@ -36,5 +36,8 @@ public class CardService {
 	public Card getById(int id) {
 		return cardrepo.findById(id);
 	}
+	public Card getByCardNumber(String cardnum) {
+		return cardrepo.findByCardNumber(cardnum);
+	}
 
 }

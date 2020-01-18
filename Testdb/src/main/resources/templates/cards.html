@@ -38,8 +38,8 @@
                         <!-- Class will contain type of card, active/inactive -->
                         <div th:class="'card ' + ${#strings.toLowerCase(card.type)} + ' ' + ${#strings.toLowerCase(card.status)}">
                             <div class="name-container">
-                                <span th:text="${card.owner_id}" class="firstname">Ime</span>
-                                <span th:text="${card.owner_id}" class="lastname">Prezime</span>
+                                <span th:text="${card.owner_name}" class="firstname">Ime</span>
+                                <span th:text="${card.owner_surname}" class="lastname">Prezime</span>
                             </div>
                             <span th:text="${card.card_number}" class="card-number">4332-5432-6765-3456</span>
                             <div class="expires-container">
@@ -55,7 +55,7 @@
                         
                         <p>Freeze card</p>
                         <p>View PIN</p>
-                        <p>More info</p>
+                        <p><a th:href="@{'card/' + ${card.id}}">More info</a></p>
                     </div> <!-- ./card-container -->
                 </div> <!-- ./col -->
             </div> <!-- ./row ./row-cols-3 -->

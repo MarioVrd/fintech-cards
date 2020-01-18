@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.rest.core.annotation.RestResource;
+
+import com.example.demo.model.enums.StatusChangeType;
 
 @Entity
 public class Deletion {
@@ -22,6 +28,13 @@ public class Deletion {
 	private String date;
 	
 	
+	public Deletion(Card card) {
+		this.card = card;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		this.date = dateFormat.format(date).toString();
+		
+	}
 	public int getId() {
 		return id;
 	}

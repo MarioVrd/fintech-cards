@@ -22,11 +22,13 @@ public class Card {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String card_number;
+	private String cardNumber;
 	private boolean active;
 	private int owner;
 	@Enumerated(EnumType.ORDINAL)
 	private CardForm form;
+	private String owner_name;
+	private String owner_surname;
 	private String cvv;
 	private String pin;
 	private String date_of_prod;
@@ -59,13 +61,103 @@ public class Card {
 	}
 	
 
-	public Card(String card_number, int owner_id, CardForm form, String cvv, String pin,
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+
+	public int getOwner() {
+		return owner;
+	}
+
+
+	public void setOwner(int owner) {
+		this.owner = owner;
+	}
+
+
+	public String getOwner_name() {
+		return owner_name;
+	}
+
+
+	public void setOwner_name(String owner_name) {
+		this.owner_name = owner_name;
+	}
+
+
+	public String getOwner_surname() {
+		return owner_surname;
+	}
+
+
+	public void setOwner_surname(String owner_surname) {
+		this.owner_surname = owner_surname;
+	}
+
+
+	public Deletion getDeletion() {
+		return deletion;
+	}
+
+
+	public void setDeletion(Deletion deletion) {
+		this.deletion = deletion;
+	}
+
+
+	public StatusChange getStatuschange() {
+		return statuschange;
+	}
+
+
+	public void setStatuschange(StatusChange statuschange) {
+		this.statuschange = statuschange;
+	}
+		
+
+	public Card(int id, String cardNumber, boolean active, int owner, CardForm form, String owner_name,
+			String owner_surname, String cvv, String pin, String date_of_prod, String expires, int pin_changes,
+			CardRequest request_id, CardType type, CardState status, boolean contactless_payment,
+			boolean online_payment, int payment_limit, Deletion deletion, StatusChange statuschange) {
+		super();
+		this.id = id;
+		this.cardNumber = cardNumber;
+		this.active = active;
+		this.owner = owner;
+		this.form = form;
+		this.owner_name = owner_name;
+		this.owner_surname = owner_surname;
+		this.cvv = cvv;
+		this.pin = pin;
+		this.date_of_prod = date_of_prod;
+		this.expires = expires;
+		this.pin_changes = pin_changes;
+		this.request_id = request_id;
+		this.type = type;
+		this.status = status;
+		this.contactless_payment = contactless_payment;
+		this.online_payment = online_payment;
+		this.payment_limit = payment_limit;
+		this.deletion = deletion;
+		this.statuschange = statuschange;
+	}
+
+
+	public Card(String card_number, int owner, String ownername, String ownersurname, CardForm form, String cvv, String pin,
 			String date_of_prod, String expires, CardRequest request_id, CardType type,
 			int payment_limit) {
 		super();
-		this.card_number = card_number;
-		this.active = true;
-		this.owner = owner_id;
+		this.owner_name = ownername;
+		this.owner_surname = ownersurname;
+		this.cardNumber = card_number;
+		this.active = false;
+		this.owner = owner;
 		this.form = form;
 		this.cvv = cvv;
 		this.pin = pin;
@@ -86,7 +178,7 @@ public class Card {
 	}
 
 	public String getCard_number() {
-		return card_number;
+		return cardNumber;
 	}
 
 	public boolean isActive() {
@@ -150,7 +242,7 @@ public class Card {
 	}
 
 	public void setCard_number(String card_number) {
-		this.card_number = card_number;
+		this.cardNumber = card_number;
 	}
 
 	public void setActive(boolean active) {
@@ -211,7 +303,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [id=" + id + ", card_number=" + card_number + ", active=" + active + ", owner_id=" + owner
+		return "Card [id=" + id + ", card_number=" + cardNumber + ", active=" + active + ", owner_id=" + owner
 				+ ", form=" + form + ", cvv=" + cvv + ", pin=" + pin + ", date_of_prod=" + date_of_prod + ", expires="
 				+ expires + ", pin_changes=" + pin_changes + ", request_id=" + request_id + ", type=" + type
 				+ ", status=" + status + ", contactless_payment=" + contactless_payment + ", online_payment="

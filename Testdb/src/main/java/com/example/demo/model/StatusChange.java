@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +28,13 @@ public class StatusChange {
 	private Card card;
 	private StatusChangeType type;
 	private String date;
+	public StatusChange(Card card, StatusChangeType type) {
+		this.card = card;
+		this.type = type;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		this.date = dateFormat.format(date).toString();
+	}
 	public int getId() {
 		return id;
 	}

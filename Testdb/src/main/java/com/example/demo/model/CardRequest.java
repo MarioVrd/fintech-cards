@@ -117,11 +117,11 @@ public class CardRequest {
         int mod = sum % 10;
         return ((mod == 0) ? 0 : 10 - mod);
     }
-	public Card createCard(int owner_id, CardRequest request) {
+	public Card createCard(int owner_id, String ownername, String ownersurname, CardRequest request) {
 		LocalDate date = LocalDate.now();
 		String todaystr = date.toString();
 		
-		Card newcard = new Card(this.generateCardNumber(), owner_id, this.getForm(), this.generateCvv(), this.generatePin(), todaystr, "never", request, this.getType(), 0);
+		Card newcard = new Card(this.generateCardNumber(), owner_id, ownername, ownersurname, this.getForm(), this.generateCvv(), this.generatePin(), todaystr, "never", request, this.getType(), 0);
 		return newcard;
 	}
 
