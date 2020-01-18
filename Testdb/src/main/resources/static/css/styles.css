@@ -1,0 +1,70 @@
+#content {
+    margin-top: 60px;
+}
+
+.card-container {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: .4rem;
+    margin-bottom: 1rem;
+    transition: .35s ease;
+}
+
+.card-container:hover {
+    transition: .35s ease;
+    box-shadow: 0px 0px 5px 2px #ccc;
+}
+
+.card {
+    padding: 1rem;
+    margin: -1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    min-height: 200px;
+}
+
+.card .name-container {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 1.2rem;
+}
+
+.card .card-number {
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    font-weight: bold;
+}
+
+.card .expires-container {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+
+.card .cvv-container {
+    position: absolute;
+    bottom: 20px;
+    left: 150px;
+}
+
+.card .description {
+    font-size: .9rem;
+}
+
+.inactive {
+    opacity: .7;
+}
+
+.visa {
+    background: blueviolet;
+}
+
+.maestro {
+    background: violet;
+}
+
+.mastercard {
+    background: yellow;
+}
