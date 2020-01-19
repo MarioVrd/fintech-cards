@@ -38,12 +38,22 @@ public class CardController {
 		model.addAttribute("cards", cards);
 		return "cards";
 	}
+        
+        @GetMapping("/activate/{id}")
+        public String activateCard(@PathVariable int id) {
+            Card card = cardservice.getById(id);
+            card.setActive(true);
+            cardservice.saveOrUpdate(card);
+            return "redirect:/cards";
+        }
+        
 	@GetMapping("/card/{id}")
 	public String getCard(Model model, @PathVariable int id) {
 		Card card = cardservice.getById(id);
 		model.addAttribute("card", card);
 		return "card";
 	}
+        
 	@PostMapping("/modify")
 	public String modifyCard(@ModelAttribute Card cardupdated ) {
 		Card before = cardservice.getById(cardupdated.getId());

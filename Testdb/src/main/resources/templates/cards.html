@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kartice</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
@@ -36,7 +36,7 @@
                 <div th:each="card : ${cards}" class="col">
                     <div class="card-container">
                         <!-- Class will contain type of card, active/inactive -->
-                        <div th:class="'card ' + ${#strings.toLowerCase(card.type)} + ' ' + ${#strings.toLowerCase(card.status)}">
+                        <div th:class="'card ' + ${#strings.toLowerCase(card.type)} + ' ' + ${#strings.toLowerCase(card.status)} + ' ' + (${card.active} ? 'active' : 'inactive')">
                             <div class="name-container">
                                 <span th:text="${card.owner_name}" class="firstname">Ime</span>
                                 <span th:text="${card.owner_surname}" class="lastname">Prezime</span>
@@ -53,9 +53,15 @@
                             <span th:text="${card.form}" class="card-form">PHYSICAL</span>
                         </div> <!-- ./card -->
                         
-                        <p>Freeze card</p>
-                        <p>View PIN</p>
-                        <p><a th:href="@{'card/' + ${card.id}}">More info</a></p>
+                        <div th:if="${card.active}">
+                            <p>Freeze card</p>
+                            <p>View PIN</p>
+                            <p><a th:href="@{'card/' + ${card.id}}">More info</a></p>
+                        </div>
+                        <p th:unless="${card.active}">
+                            You must activate your card<br>
+                            <a th:href="@{'activate/' + ${card.id}}" class="btn btn-primary">Activate card</a>
+                        </p>
                     </div> <!-- ./card-container -->
                 </div> <!-- ./col -->
             </div> <!-- ./row ./row-cols-3 -->
