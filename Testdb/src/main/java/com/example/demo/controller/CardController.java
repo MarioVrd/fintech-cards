@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.dao.CardRepo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,13 @@ public class CardController {
 
 	@Autowired
 	CardService cardservice; 
+        
+        @Autowired
 	StatusChangeService statuschangeservice;
+        
+        @Autowired
 	DeletionService deletionservice;
-	
+        	
 	@GetMapping("/cards")
 	public String getAllCards(Model model)
 	{
@@ -44,6 +49,7 @@ public class CardController {
             Card card = cardservice.getById(id);
             card.setActive(true);
             cardservice.saveOrUpdate(card);
+            statuschangeservice.saveOrUpdate(new StatusChange(card, StatusChangeType.ACTIVATION));
             return "redirect:/cards";
         }
         
@@ -54,26 +60,48 @@ public class CardController {
 		return "card";
 	}
         
-	@PostMapping("/modify")
-	public String modifyCard(@ModelAttribute Card cardupdated ) {
-		Card before = cardservice.getById(cardupdated.getId());
-		if (cardupdated.getStatus() != before.getStatus()) {
-			if (cardupdated.getStatus() == CardState.ALIVE) {
-				statuschangeservice.saveOrUpdate(new StatusChange(cardupdated, StatusChangeType.ACTIVATION));
-			}
-			else 
-				statuschangeservice.saveOrUpdate(new StatusChange(cardupdated, StatusChangeType.DEACTIVATION));
-		}
-		if (cardupdated.isActive() != before.isActive()) {
-			if (!cardupdated.isActive()) {
-				deletionservice.saveOrUpdate(new Deletion(cardupdated));
-			}
-		}
-			
-		
-		cardservice.saveOrUpdate(cardupdated);
-		return "redirect:/cards";
-		
+        @GetMapping("/delete/{id}")
+        public String deleteCard(@PathVariable int id) {
+            Card card = cardservice.getById(id);
+            card.setActive(false);
+            card.setStatus(CardState.DELETED);
+            cardservice.saveOrUpdate(card);
+            deletionservice.saveOrUpdate(new Deletion(card));
+            return "redirect:/cards";
+        }
+
+        @GetMapping("/freeze/{id}")
+        public String freezeCard(@PathVariable int id) {
+            Card card = cardservice.getById(id);
+            card.setActive(false);
+            cardservice.saveOrUpdate(card);
+            statuschangeservice.saveOrUpdate(new StatusChange(card, StatusChangeType.DEACTIVATION));
+            return "redirect:/cards";
+        }
+        
+	@PostMapping("/modify/{id}")
+	public String modifyCard(@ModelAttribute Card cardupdated, @PathVariable int id) {
+            Card before = cardservice.getById(id);
+            
+            if (cardupdated.getPin() != null) {
+                before.setPin(cardupdated.getPin());
+                before.setPin_changes(before.getPin_changes() + 1);                
+            }
+            
+            if (cardupdated.getPayment_limit() != 0) {
+                before.setPayment_limit(cardupdated.getPayment_limit());
+            }
+            
+            if (cardupdated.isContactless_payment()) {
+                before.setContactless_payment(true);
+            }
+            
+            if (cardupdated.isOnline_payment()) {
+                before.setOnline_payment(true);
+            }
+            
+            cardservice.saveOrUpdate(before);
+            return "redirect:/card/" + id;		
 	}
 	
 }

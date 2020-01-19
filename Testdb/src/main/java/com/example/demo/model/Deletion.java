@@ -27,6 +27,9 @@ public class Deletion {
 	private Card card;
 	private String date;
 	
+        public Deletion() {
+            
+        }
 	
 	public Deletion(Card card) {
 		this.card = card;

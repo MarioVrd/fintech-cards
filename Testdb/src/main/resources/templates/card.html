@@ -23,7 +23,7 @@
                         <a class="nav-link" href="/cards">Kartice</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{newrequest}">+ Napravi novu karticu</a>
+                        <a class="nav-link" href="/newrequest">+ Napravi novu karticu</a>
                     </li>
                 </ul>
             </div>
@@ -32,8 +32,34 @@
 
     <main id="content">
         <div class="container">
-            <form method="POST" action="#" th:action="@{/modify}" th:object="${card}">
-                    <p><input type="submit" value="Submit" /></p>
+            <form method="POST" th:object="${card}" th:action="'/modify/' + ${card.id}" >
+                <div class="form-group">
+                    <label for="pin-input">Change PIN</label>
+                    <input th:field="*{pin}" type="text" class="form-control" id="pin-input" aria-describedby="pinHelp" />
+                    <small id="pinHelp" class="form-text text-muted">Your PIN must have 4 digits.</small>
+                </div>
+                <div class="form-group">
+                    <label for="limit-input">Enter your card limit</label>
+                    <input th:field="*{payment_limit}" type="text" class="form-control" id="limit-input" aria-describedby="current-limit" />
+                    <small th:text="'Your current limit is: ' + *{payment_limit}" id="current-limit" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="contactless-checkbox">Enable/Disable contactless payment</label>
+                    <input th:field="*{contactless_payment}" type="checkbox" class="form-control" id="contactless-checkbox"
+                           th:checked="*{contactless_payment}" />
+                </div>
+                <div class="form-group">
+                    <label for="online-checkbox">Enable/Disable online payment</label>
+                    <input th:field="*{online_payment}" type="checkbox" class="form-control" id="online-checkbox"
+                           th:checked="*{online_payment}" />
+                </div>
+                
+                <p>
+                    <a class="btn btn-warning" th:href="'/delete/' + ${card.id}">Delete</a>
+                    <a class="btn btn-warning" th:href="'/freeze/' + ${card.id}">Freeze</a>
+                </p>
+                
+                <p><input class="btn btn-primary" type="submit" value="Submit" /></p>
             </form>
 
         </div> <!-- ./container -->

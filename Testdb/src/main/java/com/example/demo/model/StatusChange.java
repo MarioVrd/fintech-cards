@@ -28,6 +28,12 @@ public class StatusChange {
 	private Card card;
 	private StatusChangeType type;
 	private String date;
+        
+        
+        public StatusChange() {
+            
+        }
+        
 	public StatusChange(Card card, StatusChangeType type) {
 		this.card = card;
 		this.type = type;

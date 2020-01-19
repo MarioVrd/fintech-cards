@@ -22,7 +22,7 @@
                         <a class="nav-link" href="/cards">Kartice</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{newrequest}">+ Napravi novu karticu</a>
+                        <a class="nav-link" href="/newrequest">+ Napravi novu karticu</a>
                     </li>
                 </ul>
             </div>
@@ -56,12 +56,13 @@
                         <div th:if="${card.active}">
                             <p>Freeze card</p>
                             <p>View PIN</p>
+                            <p>Limit</p>
                             <p><a th:href="@{'card/' + ${card.id}}">More info</a></p>
                         </div>
-                        <p th:unless="${card.active}">
-                            You must activate your card<br>
+                        <div th:unless="${card.active}">
+                            <p>You must activate your card</p>
                             <a th:href="@{'activate/' + ${card.id}}" class="btn btn-primary">Activate card</a>
-                        </p>
+                        </div>
                     </div> <!-- ./card-container -->
                 </div> <!-- ./col -->
             </div> <!-- ./row ./row-cols-3 -->

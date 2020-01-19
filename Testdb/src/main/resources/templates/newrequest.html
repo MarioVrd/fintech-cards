@@ -23,7 +23,7 @@
                         <a class="nav-link" href="/cards">Kartice</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{newrequest}">+ Napravi novu karticu</a>
+                        <a class="nav-link" href="/newrequest">+ Napravi novu karticu</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
 
     <main id="content">
         <div class="container">
-            <form method="POST" action="#" th:action="@{/request}" th:object="${request}">
+            <form method="POST" th:action="@{/request}" th:object="${request}">
                 <div class="form-group">
                     <label for="card-form-select">Select card form</label>
                     <select th:field="*{form}" class="form-control" id="card-form-select">

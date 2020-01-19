@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.dao.StatusChangeRepo;
 import com.example.demo.model.Deletion;
 import com.example.demo.model.StatusChange;
+import org.springframework.stereotype.Service;
 
 
 
-
+@Service
 public class StatusChangeService {
 	@Autowired
 	StatusChangeRepo repo;
