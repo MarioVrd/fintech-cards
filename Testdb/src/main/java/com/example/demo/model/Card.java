@@ -62,7 +62,7 @@ public class Card {
 	
 
 	public String getCardNumber() {
-		return cardNumber;
+                return AES.decrypt(this.cardNumber, this.owner_name + this.owner_surname);
 	}
 
 
@@ -178,7 +178,7 @@ public class Card {
 	}
 
 	public String getCard_number() {
-		return cardNumber;
+		return AES.decrypt(this.cardNumber, this.owner_name + this.owner_surname);
 	}
 
 	public boolean isActive() {
@@ -194,11 +194,11 @@ public class Card {
 	}
 
 	public String getCvv() {
-		return cvv;
+		return AES.decrypt(this.cvv, this.cardNumber);
 	}
 
 	public String getPin() {
-		return pin;
+		return AES.decrypt(this.pin, this.cvv);
 	}
 
 	public String getDate_of_prod() {

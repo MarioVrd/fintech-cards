@@ -137,8 +137,11 @@ public class CardRequest {
 	public Card createCard(int owner_id, String ownername, String ownersurname, CardRequest request) {
 		LocalDate date = LocalDate.now();
 		String todaystr = date.toString();
+		String card_numberEncrypted = AES.encrypt(this.generateCardNumber(), ownername + ownersurname);
+		String cvv_encrypted = AES.encrypt(this.generateCvv(), card_numberEncrypted);
+		String pin_encrypted  = AES.encrypt(this.generatePin(), cvv_encrypted);
 		
-		Card newcard = new Card(this.generateCardNumber(), owner_id, ownername, ownersurname, this.getForm(), this.generateCvv(), this.generatePin(), todaystr, "never", request, this.getType(), 0);
+		Card newcard = new Card(card_numberEncrypted, owner_id, ownername, ownersurname, this.getForm(), cvv_encrypted, pin_encrypted, todaystr, "never", request, this.getType(), 0);
 		return newcard;
 	}
 
