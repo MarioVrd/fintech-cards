@@ -1,23 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Create new card</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Create new card</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
-	<form method="POST" action="#" th:action="@{/request}" th:object="${request}">
-            <p>Form: 
-                <select th:field="*{form}">
-                    <option th:each="cardform : ${T(com.example.demo.model.enums.CardForm).values()}" 
-                            th:value="${cardform}" th:text="${cardform}"></option>
-                </select>
-		<p>Type: 
-                    <select th:field="*{type}">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Ime Prezime</a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cards">Kartice</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{newrequest}">+ Napravi novu karticu</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="content">
+        <div class="container">
+            <form method="POST" action="#" th:action="@{/request}" th:object="${request}">
+                <div class="form-group">
+                    <label for="card-form-select">Select card form</label>
+                    <select th:field="*{form}" class="form-control" id="card-form-select">
+                        <option th:each="cardform : ${T(com.example.demo.model.enums.CardForm).values()}" 
+                                th:value="${cardform}" th:text="${cardform}"></option>
+                    </select>
+                </div>
+                <div class="address hidden form-group">
+                    <label for="address-input">Enter your address</label>
+                    <input th:field="*{address}" type="text" class="form-control" id="address-input" aria-describedby="addressHelp">
+                    <small id="addressHelp" class="form-text text-muted">We'll send you card to the address you enter.</small>
+                </div>
+                <div class="form-group">
+                    <label for="card-type-select">Select card type</label>
+                    <select th:field="*{type}" class="form-control" id="card-type-select">
                         <option th:each="cardtype : ${T(com.example.demo.model.enums.CardType).values()}" 
                             th:value="${cardtype}" th:text="${cardtype}"></option>
                     </select>
-		<p><input type="submit" value="Submit" /></p>
-	</form>
+                </div>
+                <p><input class="btn btn-primary" type="submit" value="Submit" /></p>
+            </form>
+        </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

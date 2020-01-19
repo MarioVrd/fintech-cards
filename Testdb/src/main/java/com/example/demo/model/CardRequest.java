@@ -18,51 +18,68 @@ import com.example.demo.model.enums.CardType;
 @Entity
 public class CardRequest {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	//verifikacija pri predaji zahtjeva??
-	private CardForm form;
-	private CardType type;
-	private String date_of_req;
-	private boolean creation_accepted;
-	
-	@OneToOne(mappedBy = "request_id", cascade = CascadeType.ALL)
-	private Card card; 
-	
-	public int getId() {
-		return id;
-	}
-	
-	public CardType getType() {
-		return type;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    //verifikacija pri predaji zahtjeva??
+    private CardForm form;
+    private CardType type;
+    private String address;
+    private String date_of_req;
+    private boolean creation_accepted;
 
-	public void setType(CardType type) {
-		this.type = type;
-	}
+    @OneToOne(mappedBy = "request_id", cascade = CascadeType.ALL)
+    private Card card; 
 
-	public CardForm getForm() {
-		return form;
-	}
-	public String getDate_of_req() {
-		return date_of_req;
-	}
-	public boolean isCreation_accepted() {
-		return creation_accepted;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public void setForm(CardForm form) {
-		this.form = form;
-	}
-	public void setDate_of_req(String date_of_req) {
-		this.date_of_req = date_of_req;
-	}
-	public void setCreation_accepted(boolean creation_accepted) {
-		this.creation_accepted = creation_accepted;
-	}
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CardForm getForm() {
+        return form;
+    }
+
+    public void setForm(CardForm form) {
+        this.form = form;
+    }
+
+    public CardType getType() {
+        return type;
+    }
+
+    public void setType(CardType type) {
+        this.type = type;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDate_of_req() {
+        return date_of_req;
+    }
+
+    public void setDate_of_req(String date_of_req) {
+        this.date_of_req = date_of_req;
+    }
+
+    public boolean isCreation_accepted() {
+        return creation_accepted;
+    }
+
+    public void setCreation_accepted(boolean creation_accepted) {
+        this.creation_accepted = creation_accepted;
+    }
+	
+	
 	@Override
 	public String toString() {
 		return "CardRequest [id=" + id + ", form=" + form + ", date_of_req=" + date_of_req + ", creation_accepted="
