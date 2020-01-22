@@ -24,6 +24,9 @@ public class CardService {
 	public Iterable<Card> getAllByOwner_Id(int id) {
 		return cardrepo.findAllByOwner(id);
 	}
+	public Iterable<Card> getActiveByOwner_Id(int id) {
+		return cardrepo.findActiveByOwner(id);
+	}
 
 	public void saveOrUpdate(Card card) {
 		cardrepo.save(card);

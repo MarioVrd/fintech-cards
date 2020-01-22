@@ -39,7 +39,9 @@ public class CardController {
 	public String getAllCards(Model model)
 	{
 		int id = 1;
-		Iterable<Card> cards = cardservice.getAllByOwner_Id(id);
+		Iterable<Card> cards = cardservice.getActiveByOwner_Id(id);
+
+
 		model.addAttribute("cards", cards);
 		return "cards";
 	}

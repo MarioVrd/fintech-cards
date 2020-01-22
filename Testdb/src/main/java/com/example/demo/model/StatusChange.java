@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -22,7 +24,7 @@ public class StatusChange {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "Card")
 	@RestResource(path = "CardAddress", rel = "card")
 	private Card card;

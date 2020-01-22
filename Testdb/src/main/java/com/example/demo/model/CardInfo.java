@@ -22,16 +22,19 @@ public class CardInfo {
 		this.online_transaction = online_transaction;
 	}
 	public String getCard_number() {
-		return card_number;
+		return AES.decrypt(this.card_number, this.ownername + this.ownersurname);
 	}
 	public void setCard_number(String card_number) {
 		this.card_number = card_number;
 	}
 	public String getPin() {
-		return pin;
+		return AES.decrypt(this.pin, this.cvv);
 	}
 	public void setPin(String pin) {
 		this.pin = pin;
+	}
+	public String getEncryptedCardNum() {
+		return this.card_number;
 	}
 	
 	public int getAmmount() {
@@ -41,7 +44,7 @@ public class CardInfo {
 		this.ammount = ammount;
 	}
 	public String getCvv() {
-		return cvv;
+		return AES.decrypt(this.cvv, this.card_number);
 	}
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
@@ -67,7 +70,6 @@ public class CardInfo {
 	}
 	public boolean checkCardValidity(Card card) {
 		if (!card.isActive() || card.getStatus() != CardState.ALIVE) {
-			System.out.println("se");
 			return false;}
 		if (this.getAmmount() > card.getPayment_limit() || this.isOnline_transaction() && !card.isOnline_payment() || !this.getCard_number().equals(card.getCard_number()) || !this.getCvv().equals(card.getCvv()) || !this.getOwnername().equals(card.getOwner_name()) || !this.getOwnersurname().equals(card.getOwner_surname()) || !this.getPin().equals(card.getPin()))
 			return false;

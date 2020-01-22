@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -50,8 +53,8 @@ public class Card {
 	@OneToOne(mappedBy = "card", cascade = CascadeType.ALL)
 	private Deletion deletion;
 	
-	@OneToOne(mappedBy = "card", cascade = CascadeType.ALL)
-	private StatusChange statuschange;
+	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+	private Set<StatusChange> statuschange;
 	
 	// baza, kontroleri - ako su kontroleri komplicirani uvesti servis koji handla
 	// zahtjeve s kontrolera prema bazi
@@ -111,20 +114,23 @@ public class Card {
 	}
 
 
-	public StatusChange getStatuschange() {
+	
+		
+
+	public Set<StatusChange> getStatuschange() {
 		return statuschange;
 	}
 
 
-	public void setStatuschange(StatusChange statuschange) {
+	public void setStatuschange(Set<StatusChange> statuschange) {
 		this.statuschange = statuschange;
 	}
-		
+
 
 	public Card(int id, String cardNumber, boolean active, int owner, CardForm form, String owner_name,
 			String owner_surname, String cvv, String pin, String date_of_prod, String expires, int pin_changes,
 			CardRequest request_id, CardType type, CardState status, boolean contactless_payment,
-			boolean online_payment, int payment_limit, Deletion deletion, StatusChange statuschange) {
+			boolean online_payment, int payment_limit, Deletion deletion, Set<StatusChange> statuschange) {
 		super();
 		this.id = id;
 		this.cardNumber = cardNumber;

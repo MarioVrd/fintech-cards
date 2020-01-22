@@ -16,10 +16,12 @@ public class CardValidation {
 	CardService service;
 	@PostMapping("/cards/isinfovalid")
 	public boolean cardInfoChecker(@RequestBody CardInfo info) {
-		Card card = service.getByCardNumber(info.getCard_number());
+		if (!info.isOnline_transaction() || info.getCard_number() == null || info.getCvv() == null || info.getPin() == null || info.getOwnername()  == null || info.getOwnersurname() == null)
+			return false;
+		Card card = service.getByCardNumber(info.getEncryptedCardNum());
+		if (card.getCard_number() == null)
+			return false;
 		return info.checkCardValidity(card);
-		
-		
 	}
 
 }
