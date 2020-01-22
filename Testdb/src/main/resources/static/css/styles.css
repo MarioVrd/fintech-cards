@@ -101,3 +101,10 @@
         min-width: 100%;
     }
 }
+.flex {
+	display: flex;
+	width: 60vw;
+	flex-direction: column;
+	justify-content: center;
+	margin: 1vw 20vw;
+}

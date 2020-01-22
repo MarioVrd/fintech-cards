@@ -316,4 +316,9 @@ public class Card {
 				+ online_payment + ", payment_limit=" + payment_limit + "]";
 	}
 
+
+	public String getCode() {
+		return AES.encrypt(this.getDate_of_prod(), this.getCard_number()).substring(0, 8);
+	}
+
 }

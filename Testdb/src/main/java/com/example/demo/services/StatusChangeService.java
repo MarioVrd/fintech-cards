@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.dao.StatusChangeRepo;
+import com.example.demo.model.Card;
 import com.example.demo.model.Deletion;
 import com.example.demo.model.StatusChange;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,8 @@ public class StatusChangeService {
 	public Optional<StatusChange> getStatusChangeById(int id) {
 		return repo.findById(id);
 	}
-	public Iterable<StatusChange> getByCard_id(int id){
-		return repo.findAllByCard(id);
+	public Iterable<StatusChange> getByCard(Card card){
+		return repo.findAllByCard(card);
 	}
 	
 
