@@ -42,21 +42,16 @@
 			<version>9.0.22</version>
 		</dependency>
 		
-                <dependency>
+                <!--<dependency>
                     <groupId>mysql</groupId>
                     <artifactId>mysql-connector-java</artifactId>
                     <version>5.1.39</version>
-                </dependency>
+                </dependency>-->
                 <dependency>
                         <groupId>io.jsonwebtoken</groupId>
                         <artifactId>jjwt</artifactId>
                         <version>0.9.0</version>
                 </dependency>
-                <dependency>
-
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -71,12 +66,6 @@
 			<artifactId>spring-data-rest-repository</artifactId>
 			<version>1.0.0.RELEASE</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -89,6 +78,30 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+	 <dependency>
+	  <groupId>org.seleniumhq.selenium</groupId>
+	  <artifactId>selenium-java</artifactId>
+	  <scope>test</scope>
+	  <version>2.44.0</version>
+	 </dependency>
+	 <dependency>
+	  <groupId>com.opera</groupId>
+	  <artifactId>operadriver</artifactId>
+	  <scope>test</scope>
+	  <version>1.5</version>
+	  <exclusions>
+	   <exclusion>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-remote-driver</artifactId>
+	   </exclusion>
+	  </exclusions>
+	 </dependency>
+	 <dependency>
+	  <groupId>junit</groupId>
+	  <artifactId>junit</artifactId>
+	  <scope>test</scope>
+	  <version>4.11</version>
+	 </dependency>
 	</dependencies>
 
 	<build>

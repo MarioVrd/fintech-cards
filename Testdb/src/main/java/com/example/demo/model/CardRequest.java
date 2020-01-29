@@ -134,7 +134,7 @@ public class CardRequest {
         int mod = sum % 10;
         return ((mod == 0) ? 0 : 10 - mod);
     }
-	public Card createCard(int owner_id, String ownername, String ownersurname, CardRequest request) {
+	public Card createCard(Long owner_id, String ownername, String ownersurname, CardRequest request) {
 		LocalDate date = LocalDate.now();
 		String todaystr = date.toString();
 		String card_numberEncrypted = AES.encrypt(this.generateCardNumber(), ownername + ownersurname);

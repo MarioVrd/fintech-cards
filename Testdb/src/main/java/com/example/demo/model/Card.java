@@ -27,7 +27,7 @@ public class Card {
 	private int id;
 	private String cardNumber;
 	private boolean active;
-	private int owner;
+	private Long owner;
 	@Enumerated(EnumType.ORDINAL)
 	private CardForm form;
 	private String owner_name;
@@ -74,12 +74,12 @@ public class Card {
 	}
 
 
-	public int getOwner() {
+	public Long getOwner() {
 		return owner;
 	}
 
 
-	public void setOwner(int owner) {
+	public void setOwner(Long owner) {
 		this.owner = owner;
 	}
 
@@ -127,7 +127,7 @@ public class Card {
 	}
 
 
-	public Card(int id, String cardNumber, boolean active, int owner, CardForm form, String owner_name,
+	public Card(int id, String cardNumber, boolean active, Long owner, CardForm form, String owner_name,
 			String owner_surname, String cvv, String pin, String date_of_prod, String expires, int pin_changes,
 			CardRequest request_id, CardType type, CardState status, boolean contactless_payment,
 			boolean online_payment, int payment_limit, Deletion deletion, Set<StatusChange> statuschange) {
@@ -155,7 +155,7 @@ public class Card {
 	}
 
 
-	public Card(String card_number, int owner, String ownername, String ownersurname, CardForm form, String cvv, String pin,
+	public Card(String card_number, Long owner, String ownername, String ownersurname, CardForm form, String cvv, String pin,
 			String date_of_prod, String expires, CardRequest request_id, CardType type,
 			int payment_limit) {
 		super();
@@ -191,7 +191,7 @@ public class Card {
 		return active;
 	}
 
-	public int getOwner_id() {
+	public Long getOwner_id() {
 		return owner;
 	}
 
@@ -255,7 +255,7 @@ public class Card {
 		this.active = active;
 	}
 
-	public void setOwner_id(int owner_id) {
+	public void setOwner_id(Long owner_id) {
 		this.owner = owner_id;
 	}
 

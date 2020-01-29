@@ -5,6 +5,7 @@
  */
 package com.example.demo.security;
 
+import com.example.demo.services.JwtService;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.servlet.FilterChain;
@@ -32,6 +33,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
     
     @Autowired
+    private JwtService jwtService;
+    
+    @Autowired
     private CustomUserDetailsService customUserDetailsService;
     
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
@@ -40,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, 
             HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            String jwt = getJwtFromRequest(request);
+            String jwt = jwtService.getJwtFromRequest(request);
             
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
@@ -60,19 +64,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
     
-    private String getJwtFromRequest(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        
-        if (cookies != null) {
-            Cookie token = Arrays.stream(cookies)
-                .filter(cookie -> "Token".equals(cookie.getName()))
-                .findFirst()
-                .orElse(null);
-            String jwt = token.getValue();
-            return jwt;
-        }
-                
-        return null;
-    }
+    
     
 }
