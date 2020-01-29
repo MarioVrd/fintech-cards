@@ -33,13 +33,14 @@
 
     <main id="content">
         <div class="container">
-		<form method="POST" th:object="${code}" th:action="'/activation/' + ${id}">
-			<div class="flex">
-				<p>Unesite šifru<p> <input type="text" class="form-control" id="code" name="code"><br>
-				<input type="submit" class="btn btn-primary" value="Submit">
-			</div>
-		
-		</form>
+            <form method="POST" th:object="${code}" th:action="'/activation/' + ${id}">
+                <div class="form-group">
+                    <label for="code">Enter code</label>
+                    <input type="text" class="form-control" id="code" name="code">
+                </div>
+                <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+                                
+            </form>
     
         </div>
     </main>

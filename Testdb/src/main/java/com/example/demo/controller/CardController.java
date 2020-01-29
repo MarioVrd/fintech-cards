@@ -63,7 +63,7 @@ public class CardController {
     public String activatePhysical(@PathVariable int id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("code", new Code());
-        return "activate.html";
+        return "activate";
     }
         
     @GetMapping("/activate/{id}")
@@ -85,9 +85,9 @@ public class CardController {
 
     @GetMapping("/card/{id}")
     public String getCard(Model model, @PathVariable int id) {
-            Card card = cardservice.getById(id);
-            model.addAttribute("card", card);
-            return "card";
+        Card card = cardservice.getById(id);
+        model.addAttribute("card", card);
+        return "card";
     }
 
     @GetMapping("/delete/{id}")

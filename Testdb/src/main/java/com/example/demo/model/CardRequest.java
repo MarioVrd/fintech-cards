@@ -134,15 +134,19 @@ public class CardRequest {
         int mod = sum % 10;
         return ((mod == 0) ? 0 : 10 - mod);
     }
-	public Card createCard(Long owner_id, String ownername, String ownersurname, CardRequest request) {
-		LocalDate date = LocalDate.now();
-		String todaystr = date.toString();
-		String card_numberEncrypted = AES.encrypt(this.generateCardNumber(), ownername + ownersurname);
-		String cvv_encrypted = AES.encrypt(this.generateCvv(), card_numberEncrypted);
-		String pin_encrypted  = AES.encrypt(this.generatePin(), cvv_encrypted);
-		
-		Card newcard = new Card(card_numberEncrypted, owner_id, ownername, ownersurname, this.getForm(), cvv_encrypted, pin_encrypted, todaystr, "never", request, this.getType(), 0);
-		return newcard;
-	}
+
+        
+    public Card createCard(Long owner_id, String ownername, String ownersurname, CardRequest request) {
+        LocalDate date = LocalDate.now();
+        int year = date.getYear() + 5;
+        int month = date.getMonthValue();
+        String expires = String.valueOf(month) + "/" + String.valueOf(year);
+        String todaystr = date.toString();
+        String card_numberEncrypted = AES.encrypt(this.generateCardNumber(), ownername + ownersurname);
+        String cvv_encrypted = AES.encrypt(this.generateCvv(), card_numberEncrypted);
+        String pin_encrypted  = AES.encrypt(this.generatePin(), cvv_encrypted);
+        Card newcard = new Card(card_numberEncrypted, owner_id, ownername, ownersurname, this.getForm(), cvv_encrypted, pin_encrypted, todaystr, expires, request, this.getType(), 0);
+        return newcard;
+    }
 
 }

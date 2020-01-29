@@ -60,7 +60,7 @@ public class Card {
 	// zahtjeve s kontrolera prema bazi
 	// kontroler ne smije baratati s bazom niti repom, već neki međuservis
 
-	Card(){
+	public Card(){
 	}
 	
 
@@ -264,11 +264,11 @@ public class Card {
 	}
 
 	public void setCvv(String cvv) {
-		this.cvv = cvv;
+		this.cvv = AES.encrypt(cvv, this.cardNumber);
 	}
 
 	public void setPin(String pin) {
-		this.pin = pin;
+		this.pin = AES.encrypt(pin, this.cvv);
 	}
 
 	public void setDate_of_prod(String date_of_prod) {

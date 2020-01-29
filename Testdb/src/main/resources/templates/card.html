@@ -35,8 +35,8 @@
             <form method="POST" th:object="${card}" th:action="'/modify/' + ${card.id}" >
                 <div class="form-group">
                     <label for="pin-input">Change PIN</label>
-                    <input th:field="*{pin}" type="text" class="form-control" id="pin-input" aria-describedby="pinHelp" />
-                    <small id="pinHelp" class="form-text text-muted">Your PIN must have 4 digits.</small>
+                    <input th:field="*{pin}" th:value="*{pin}" type="text" class="form-control" id="pin-input" aria-describedby="pinHelp" />
+                    <small id="pinHelp" class="form-text text-muted" th:text="'Your current PIN is ' + *{pin}">Current PIN...</small>
                 </div>
                 <div class="form-group">
                     <label for="limit-input">Enter your card limit</label>
