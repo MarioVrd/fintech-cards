@@ -35,7 +35,7 @@ public class JwtService {
             return jwt;
         }
                 
-        return null;
+        return "";
     }
     
     public Long getIdFromJWT(String token) {
