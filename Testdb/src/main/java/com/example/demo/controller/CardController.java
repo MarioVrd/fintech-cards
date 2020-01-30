@@ -63,7 +63,7 @@ public class CardController {
     public String activatePhysical(@PathVariable int id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("code", new Code());
-        return "activate";
+        return "activate.html";
     }
         
     @GetMapping("/activate/{id}")
@@ -85,9 +85,9 @@ public class CardController {
 
     @GetMapping("/card/{id}")
     public String getCard(Model model, @PathVariable int id) {
-        Card card = cardservice.getById(id);
-        model.addAttribute("card", card);
-        return "card";
+            Card card = cardservice.getById(id);
+            model.addAttribute("card", card);
+            return "card";
     }
 
     @GetMapping("/delete/{id}")
@@ -112,9 +112,8 @@ public class CardController {
     @PostMapping("/modify/{id}")
     public String modifyCard(@ModelAttribute Card cardupdated, @PathVariable int id) {
         Card before = cardservice.getById(id);
-
-        if (cardupdated.getPin() != null) {
-            before.setPin(cardupdated.getPin());
+        if (cardupdated.getPinRaw() != null) {
+            before.updatePin(cardupdated.getPinRaw());
             before.setPin_changes(before.getPin_changes() + 1);                
         }
 

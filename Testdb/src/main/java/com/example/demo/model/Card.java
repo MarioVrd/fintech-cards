@@ -56,18 +56,8 @@ public class Card {
 	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
 	private Set<StatusChange> statuschange;
 	
-	// baza, kontroleri - ako su kontroleri komplicirani uvesti servis koji handla
-	// zahtjeve s kontrolera prema bazi
-	// kontroler ne smije baratati s bazom niti repom, već neki međuservis
-
-	public Card(){
+	Card(){
 	}
-	
-
-	public String getCardNumber() {
-                return AES.decrypt(this.cardNumber, this.owner_name + this.owner_surname);
-	}
-
 
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
@@ -93,7 +83,9 @@ public class Card {
 		this.owner_name = owner_name;
 	}
 
-
+	public void updatePin(String pin) {
+		this.pin = AES.encrypt(pin, this.cvv);
+	}
 	public String getOwner_surname() {
 		return owner_surname;
 	}
@@ -113,9 +105,6 @@ public class Card {
 		this.deletion = deletion;
 	}
 
-
-	
-		
 
 	public Set<StatusChange> getStatuschange() {
 		return statuschange;
@@ -184,7 +173,11 @@ public class Card {
 	}
 
 	public String getCard_number() {
-		return AES.decrypt(this.cardNumber, this.owner_name + this.owner_surname);
+		if (this.getOwner_name() != null && this.getOwner_surname() != null && this.cardNumber != null) {
+			return AES.decrypt(this.cardNumber, this.owner_name + this.owner_surname);
+		}
+		else
+			return "ERROR";
 	}
 
 	public boolean isActive() {
@@ -200,11 +193,18 @@ public class Card {
 	}
 
 	public String getCvv() {
-		return AES.decrypt(this.cvv, this.cardNumber);
+		if (this.getCard_number() != null && this.cvv != null) {
+			return AES.decrypt(this.cvv, this.cardNumber);
+		}
+		else
+			return "ERROR";
 	}
 
 	public String getPin() {
-		return AES.decrypt(this.pin, this.cvv);
+		if (this.getCvv() != null && this.pin != null) {
+			return AES.decrypt(this.pin, this.cvv);
+		}
+		return "ERROR";
 	}
 
 	public String getDate_of_prod() {
@@ -264,11 +264,11 @@ public class Card {
 	}
 
 	public void setCvv(String cvv) {
-		this.cvv = AES.encrypt(cvv, this.cardNumber);
+		this.cvv = cvv;
 	}
 
 	public void setPin(String pin) {
-		this.pin = AES.encrypt(pin, this.cvv);
+		this.pin = pin;
 	}
 
 	public void setDate_of_prod(String date_of_prod) {
@@ -318,7 +318,20 @@ public class Card {
 
 
 	public String getCode() {
-		return AES.encrypt(this.getDate_of_prod(), this.getCard_number()).substring(0, 8);
+		if (this.getDate_of_prod() != null && this.getCard_number() != null) {
+			return AES.encrypt(this.getDate_of_prod(), this.getCard_number()).substring(0, 8);
+		}
+		else
+			return "ERROR";
+	}
+	public String getPinRaw() {
+		return this.pin;
 	}
 
+	public String getCvvRaw() {
+		return this.cvv;
+	}
+	public String getCardNumRaw() {
+		return this.cardNumber;
+	}
 }
